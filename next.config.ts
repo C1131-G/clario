@@ -1,4 +1,9 @@
+import bundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
@@ -9,17 +14,20 @@ const nextConfig: NextConfig = {
     reference: { expire: 604_800, revalidate: 86_400, stale: 3600 },
   },
   experimental: {
+    exposeTestingApiInProductionBuild: process.env.EXPOSE_TESTING_API === "1",
     /**
      * Inline critical CSS into the HTML response for faster first paint
      * (next-beats / Next 16 Instant Navigations pattern).
      */
     inlineCss: true,
+    /**
+     * Tree-shake barrel imports from icon packages per cold start.
+     */
+    optimizePackageImports: ["@phosphor-icons/react"],
+    serverActions: {
+      bodySizeLimit: "6mb",
+    },
   },
-  /**
-   * Prefetch one App Shell per route (shared across Links). Session cookies are
-   * included in shells that read them. Pair with Link prefetch={true} +
-   * segment `prefetch = 'partial'` for URL/searchParams-aware prefetches.
-   */
   /**
    * Statically type next/link href and next/navigation push/replace/prefetch
    * against the App Router route map (.next/types/routes.d.ts).
@@ -28,4 +36,4 @@ const nextConfig: NextConfig = {
   typedRoutes: true,
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
