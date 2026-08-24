@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
     reference: { expire: 604_800, revalidate: 86_400, stale: 3600 },
   },
   experimental: {
-    exposeTestingApiInProductionBuild: process.env.EXPOSE_TESTING_API === "1",
     /**
      * Inline critical CSS into the HTML response for faster first paint
      * (next-beats / Next 16 Instant Navigations pattern).
