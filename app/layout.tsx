@@ -39,8 +39,8 @@ const RootLayout = ({
 );
 
 export const metadata = {
-  description: "A clear starting point for your next project.",
-  title: "Clario",
+  description: "AI business intelligence for SAP Business One.",
+  title: "Clario — AI business intelligence for SAP Business One",
 };
 
 export default RootLayout;
