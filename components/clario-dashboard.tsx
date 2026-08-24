@@ -18,6 +18,7 @@ import { useReducer } from "react";
 import type { FormEvent, KeyboardEvent } from "react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
 
 type Accent = "amber" | "blue" | "purple" | "teal";
 type MessageRole = "assistant" | "user";
@@ -340,9 +341,10 @@ const ConversationList = ({
   <ul className="conversation-list">
     {conversations.map((conversation) => (
       <li key={conversation.id}>
-        <button
+        <Button
           type="button"
-          className={`conversation-item ${activeId === conversation.id ? "is-active" : ""}`}
+          className={`conversation-item h-auto min-h-11 w-full justify-start rounded-none ${activeId === conversation.id ? "is-active" : ""}`}
+          variant="ghost"
           aria-pressed={activeId === conversation.id}
           onClick={() => onSelect(conversation)}
         >
@@ -351,7 +353,7 @@ const ConversationList = ({
             <time>{conversation.time}</time>
           </span>
           <span className="conversation-preview">{conversation.preview}</span>
-        </button>
+        </Button>
       </li>
     ))}
   </ul>
@@ -382,13 +384,15 @@ const ResultPanel = ({ result }: { result: DashboardResult | null }) => {
           <p className="eyebrow">LIVE RESULT · DEMO DATA</p>
           <h2>{result.title}</h2>
         </div>
-        <button
+        <Button
           type="button"
           className="icon-button subtle-button"
+          variant="ghost"
+          size="icon"
           aria-label="Open result details"
         >
           <ArrowUpRight aria-hidden="true" size={17} weight="bold" />
-        </button>
+        </Button>
       </div>
 
       <p className="result-summary">{result.summary}</p>
@@ -648,14 +652,16 @@ const ClarioDashboard = () => {
           Business intelligence for SAP Business One.
         </p>
 
-        <button
+        <Button
           type="button"
           className="new-chat-button"
+          variant="default"
+          size="lg"
           onClick={startNewChat}
         >
           <Plus aria-hidden="true" size={18} weight="bold" />
           New chat
-        </button>
+        </Button>
 
         <div className="history-heading">
           <p className="eyebrow">RECENT QUESTIONS</p>
@@ -774,15 +780,16 @@ const ClarioDashboard = () => {
           </div>
           <div className="prompt-list">
             {PROMPTS.map(({ icon: Icon, label }) => (
-              <button
+              <Button
                 type="button"
                 className="prompt-button"
+                variant="outline"
                 key={label}
                 onClick={() => submitQuestion(label)}
               >
                 <Icon aria-hidden="true" size={16} weight="duotone" />
                 {label}
-              </button>
+              </Button>
             ))}
           </div>
         </section>
@@ -802,13 +809,15 @@ const ClarioDashboard = () => {
             onKeyDown={handleComposerKeyDown}
             placeholder="Ask about sales, inventory, customers, or purchases..."
           />
-          <button
+          <Button
             type="submit"
             className="send-button"
+            variant="default"
+            size="icon-lg"
             aria-label="Send question"
           >
             <PaperPlaneTilt aria-hidden="true" size={19} weight="fill" />
-          </button>
+          </Button>
           <p>Press Enter to send · Shift+Enter for a new line</p>
         </form>
         <output

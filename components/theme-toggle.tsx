@@ -3,15 +3,19 @@
 import { Moon, Sun } from "@phosphor-icons/react";
 import { useTheme } from "next-themes";
 
+import { Button } from "@/components/ui/button";
+
 const ThemeToggle = () => {
   const { resolvedTheme, setTheme } = useTheme();
   const isDark = resolvedTheme !== "light";
   const nextTheme = isDark ? "light" : "dark";
 
   return (
-    <button
+    <Button
       type="button"
       className="icon-button"
+      variant="outline"
+      size="icon-lg"
       aria-label={`Switch to ${nextTheme} theme`}
       onClick={() => setTheme(nextTheme)}
     >
@@ -20,7 +24,7 @@ const ThemeToggle = () => {
       ) : (
         <Moon aria-hidden="true" size={18} weight="bold" />
       )}
-    </button>
+    </Button>
   );
 };
 
