@@ -39,18 +39,19 @@ const buttonVariants = cva(
   }
 );
 
-const Button = ({
+function Button({
   className,
   variant = "default",
   size = "default",
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) => (
-  <ButtonPrimitive
-    data-slot="button"
-    className={cn(buttonVariants({ className, size, variant }))}
-    {...props}
-  />
-);
+}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+  return (
+    <ButtonPrimitive
+      data-slot="button"
+      className={cn(buttonVariants({ className, size, variant }))}
+      {...props}
+    />
+  );
+}
 
-// oxlint-disable-next-line react-doctor/only-export-components
 export { Button, buttonVariants };

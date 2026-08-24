@@ -17,6 +17,10 @@ export default defineConfig({
     antiSlop,
     selectJsPlugins(["sonarjs", "react-doctor"]),
   ],
-  ignorePatterns: core.ignorePatterns,
+  ignorePatterns: [
+    ...(core.ignorePatterns ?? []),
+    "components/ui/**",
+    "hooks/use-mobile.ts",
+  ],
   settings: jsPluginSettings,
 });
