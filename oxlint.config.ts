@@ -8,6 +8,7 @@ import react from "ultracite/oxlint/react";
 import vitest from "ultracite/oxlint/vitest";
 
 export default defineConfig({
+  categories: { correctness: "error" },
   extends: [
     core,
     react,
@@ -15,12 +16,15 @@ export default defineConfig({
     vitest,
     nextJsPlugins,
     antiSlop,
-    selectJsPlugins(["sonarjs", "react-doctor"]),
+    selectJsPlugins(["react-doctor"]),
   ],
   ignorePatterns: [
     ...(core.ignorePatterns ?? []),
     "components/ui/**",
     "hooks/use-mobile.ts",
   ],
+  rules: {
+    "eslint/complexity": ["warn", { max: 20 }],
+  },
   settings: jsPluginSettings,
 });

@@ -10,3 +10,7 @@ pre-commit:
         - "**/*.jsonc"
         - "**/*.css"
       stage_fixed: true
+    - run: bun run lint
+    - run: bun run quality:fallow:audit
+    - run: bun run quality:react -- --scope changed --blocking none
+    - run: bun run quality:shadscan
